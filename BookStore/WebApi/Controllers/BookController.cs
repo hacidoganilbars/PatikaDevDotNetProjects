@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApi.BookOperations.CreateBook;
 using WebApi.BookOperations.GetBooks;
+using WebApi.BookOperations.UpdateBook;
 using WebApi.DBOperations;
+using static WebApi.BookOperations.UpdateBook.UpdateBookCommand;
 
 namespace WebApi.AddControllers{
 
@@ -80,17 +82,20 @@ namespace WebApi.AddControllers{
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateBook(int id,[FromBody] Book updatedBook)
+        public IActionResult UpdateBook(int id,[FromBody] UpdateBookModel updatedBook)
         {
-            var book = _context.Books.SingleOrDefault(x => x.Id==id );
-            if(book is null){
-                return BadRequest();
+            UpdateBookCommand command = new UpdateBookCommand(_context);
+            
+            try
+            {
+                command.BookId = id;
+                command.Model=updatedBook;
+                command.Handle();
             }
-            book.GenreId = updatedBook.GenreId != default ? updatedBook.GenreId:book.GenreId;
-            book.PageCount=updatedBook.PageCount !=default?updatedBook.PageCount:book.PageCount;
-            book.PublishDate = updatedBook.PublishDate !=default?updatedBook.PublishDate:book.PublishDate;
-            book.Title=updatedBook.Title !=default?updatedBook.Title:book.Title;
-            _context.SaveChanges();
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
             return Ok();
         }
 
