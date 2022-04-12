@@ -6,3 +6,4 @@ Microsoft.EntityFrameworkCore --version 7.0.0-preview.2.22153.1
 Microsoft.EntityFrameworkCore.InMemory --version 7.0.0-preview.2.22153.1  
 AutoMapper --version 11.0.1  
 AutoMapper.Extensions.Microsoft.DependencyInjection --version 11.0.0  
+Deneme  
