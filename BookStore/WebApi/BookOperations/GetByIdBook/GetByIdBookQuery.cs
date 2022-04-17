@@ -2,7 +2,7 @@ using AutoMapper;
 using WebApi.Common;
 using WebApi.DBOperations;
 
-namespace WebApi.BookOperations.GetByIdBookQuery
+namespace WebApi.BookOperations.GetByIdBook
 {
     public class GetByIdBookQuery
     {

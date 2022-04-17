@@ -1,7 +1,7 @@
 using AutoMapper;
 using WebApi.BookOperations.CreateBook;
 using WebApi.BookOperations.GetBooks;
-using WebApi.BookOperations.GetByIdBookQuery;
+using WebApi.BookOperations.GetByIdBook;
 
 namespace WebApi.Common
 {
