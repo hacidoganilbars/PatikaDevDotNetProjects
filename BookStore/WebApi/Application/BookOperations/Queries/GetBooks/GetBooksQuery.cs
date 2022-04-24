@@ -1,8 +1,9 @@
 using AutoMapper;
-using WebApi.Common;
+using Microsoft.EntityFrameworkCore;
 using WebApi.DBOperations;
+using WebApi.Entities;
 
-namespace WebApi.BookOperations.GetBooks
+namespace WebApi.Application.BookOperations.Queries.GetBooks
 {
     public class GetBooksQuery
     {
@@ -11,13 +12,13 @@ namespace WebApi.BookOperations.GetBooks
         private readonly IMapper _mapper;
         public GetBooksQuery(BookStoreDBContext dbContext, IMapper mapper)
         {
-            _dbContext=dbContext;
+            _dbContext = dbContext;
             _mapper = mapper;
         }
 
         public List<BookViewModel> Handle()
         {
-            var bookList= _dbContext.Books.OrderBy(x=>x.Id).ToList<Book>();
+            var bookList = _dbContext.Books.Include(x => x.Genre).OrderBy(x => x.Id).ToList<Book>();
             // List<BookViewModel> vmBooks =new List<BookViewModel>();
             // foreach (var book in bookList)
             // {
@@ -28,7 +29,7 @@ namespace WebApi.BookOperations.GetBooks
             //         PublishDate=book.PublishDate.Date.ToString("dd/MM/yyyy")
             //     });
             // }
-            List<BookViewModel> vmBooks=_mapper.Map<List<BookViewModel>>(bookList);
+            List<BookViewModel> vmBooks = _mapper.Map<List<BookViewModel>>(bookList);
             return vmBooks;
         }
     }
@@ -37,7 +38,7 @@ namespace WebApi.BookOperations.GetBooks
     {
         public string Title { get; set; }
         public int PageCount { get; set; }
-        public string PublishDate{get;set;}
-        public string Genre{get;set;}
+        public string PublishDate { get; set; }
+        public string Genre { get; set; }
     }
 }
