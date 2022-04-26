@@ -24,13 +24,14 @@ namespace WebApi.DBOperations
                         Name="Romance",
                     }
                 );
+                
                 context.Books.AddRange(
                     new Book(){
                     //Id=1,
-                    Title="Lean Startup",
-                    GenreId=1,//Personal Growth
-                    PageCount=200,
-                    PublishDate=new DateTime(2001,06,12)
+                        Title="Lean Startup",
+                        GenreId=1,//Personal Growth
+                        PageCount=200,
+                        PublishDate=new DateTime(2001,06,12)
                     },
                     new Book(){
                         //Id=2,
@@ -46,6 +47,26 @@ namespace WebApi.DBOperations
                         PageCount=540,
                         PublishDate=new DateTime(2001,12,21)
                     }
+                );
+                context.Authors.AddRange(
+                    new Author(){
+                        Name="Mahmut",
+                        Surname="Mahmutsoy",
+                        BookId=1,
+                        BirthDate=new DateTime(1980,06,12),   
+                    },
+                    new Author(){
+                        Name="Ahmet",
+                        Surname="Ahmetsoy",
+                        BookId=2,
+                        BirthDate=new DateTime(1968,07,22),   
+                    },new Author(){
+                        Name="Özlem",
+                        Surname="Özlemsoy",
+                        BookId=3,
+                        BirthDate=new DateTime(1977,04,15),   
+                    }
+
                 );
                 context.SaveChanges();
             }
